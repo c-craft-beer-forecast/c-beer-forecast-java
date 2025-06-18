@@ -1,6 +1,6 @@
-package com.beer.beer_forecast.repository;
+package com.beer.beer_forecast.account.repository;
 
-import com.beer.beer_forecast.model.Login;
+import com.beer.beer_forecast.account.model.Login;
 import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.*;
 

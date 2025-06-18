@@ -1,4 +1,4 @@
-package com.beer.beer_forecast.config;
+package com.beer.beer_forecast.account.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
