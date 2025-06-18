@@ -1,20 +1,23 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>H&C inc. 管理者ページ</title>
-    <link rel="stylesheet" th:href="@{/css/style.css}" /></head>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
 </head>
+</head>
+
 <body>
     <header class="admin-header">
         <div class="header-left">
             <span class="company-name">H&C inc</span>
         </div>
         <div class="header-right">
-          <span class="employee-id">社員番号 : <span th:text="${session.loginUser.id}">1234</span></span>
-          <a th:href="@{/admin-login}" class="logout-btn">ログアウト</a>
-         
+            <span class="employee-id">社員番号 : <span th:text="${session.loginUser.id}">1234</span></span>
+            <a th:href="@{/admin-login}" class="logout-btn">ログアウト</a>
+
         </div>
     </header>
 
@@ -25,7 +28,7 @@
                     <li><a href="#" class="sidebar-item active" data-content="demand-prediction">需要予測</a></li>
                     <li><a href="#" class="sidebar-item" data-content="sales-performance">販売実績</a></li>
                     <li><a href="#" class="sidebar-item" data-content="employee-management">従業員管理</a></li>
-                     <li><a th:href="@{/changepassword}" class="switch-button">パスワード変更</a></li>
+                    <li><a th:href="@{/changepassword}" class="switch-button">パスワード変更</a></li>
                 </ul>
             </nav>
         </aside>
@@ -41,11 +44,44 @@
             </div>
             <div id="employee-management" class="content-section">
                 <h2>従業員管理</h2>
-                <p>ここに従業員のリストや管理機能が表示されます。</p>
+                <p>               <h2>従業員一覧</h2>
+                <table border="1">
+                    <tr>
+                        <th>社員番号</th>
+                        <th>メールアドレス</th>
+                        <th>名前</th>
+                        <th>操作</th>
+                    </tr>
+                    <tr th:each="emp : ${employeeList}">
+                        <td th:text="${emp.id}">1</td>
+                        <td th:text="${emp.email}">email@example.com</td>
+                        <td th:text="${emp.name}">名前</td>
+                        <td>
+                            <a href="#">編集</a>
+
+                            <form th:action="@{'/delete/' + ${emp.id}}" method="post">
+                                <button type="submit">削除</button>
+                            </form>
+                        </td>
+                    </tr>
+                </table>
+
+                <!-- 従業員追加フォーム -->
+                <h2>従業員追加</h2>
+                <form th:action="@{/add}" th:object="${employee}" method="post">
+                    <p>名前：<input type="text" th:field="*{name}" /></p>
+                    <p>メール：<input type="email" th:field="*{email}" /></p>
+                    <p>パスワード：<input type="password" th:field="*{password}" /></p>
+                    <p>管理者：<input type="checkbox" th:field="*{admin}" /></p>
+                    <button type="submit">完了</button>
+                </form>
+            </p>
+
             </div>
         </main>
     </div>
 
     <script src="script.js"></script>
 </body>
+
 </html>

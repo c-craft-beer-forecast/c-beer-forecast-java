@@ -3,11 +3,11 @@ package com.beer.beer_forecast.account.model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name="employees")
+@Table(name = "employees")
 public class Login {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-     private Integer id;
+    private Integer id;
 
     private String name;
     private String email;
@@ -23,10 +23,11 @@ public class Login {
         this.password = password;
         this.admin = admin;
     }
+
     public Login(String email, String password) {
-    this.email = email;
-    this.password = password;
-}
+        this.email = email;
+        this.password = password;
+    }
 
     public Integer getId() {
         return id;
