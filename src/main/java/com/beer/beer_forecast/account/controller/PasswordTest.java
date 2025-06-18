@@ -15,4 +15,3 @@ public class PasswordTest {
         System.out.println("新加密密码: " + encoder.encode(rawPassword));
     }
 }
-
