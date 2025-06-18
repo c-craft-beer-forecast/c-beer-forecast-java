@@ -13,7 +13,7 @@ public class AccountContoroller {
     @Autowired
     private AccountService service;
 
-    // admin画面のgetメソッド
+    // admin画面のgetメソッド。logincontrollerからリダイレクト
     @GetMapping("/admin")
     public String showAddForm(Model model) {
         model.addAttribute("employeeList", service.getAllEmployees());
@@ -32,6 +32,21 @@ public class AccountContoroller {
     @PostMapping("/delete/{id}")
     public String deleteEmployee(@PathVariable("id") Integer id) {
         service.deleteEmployeeById(id);
-        return "redirect:/admin"; 
-}
+        return "redirect:/admin";
+    }
+
+    // アカウント編集
+    @GetMapping("/edit/{id}")
+    public String showEditForm(@PathVariable("id") Integer id, Model model) {
+        Login employee = service.findById(id);
+        model.addAttribute("employee", employee);
+        return "editaccount"; // edit.html に飛ぶ
+    }
+
+    @PostMapping("/update")
+    public String updateEmployee(@ModelAttribute Login updatedEmployee) {
+        service.updateEmployeeInfo(updatedEmployee); // nameとemailのみ更新
+        
+        return "redirect:/admin";
+    }
 }
