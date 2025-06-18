@@ -1,7 +1,7 @@
-package com.beer.beer_forecast.service;
+package com.beer.beer_forecast.account.service;
 
-import com.beer.beer_forecast.model.Login;
-import com.beer.beer_forecast.repository.LoginRepository;
+import com.beer.beer_forecast.account.model.Login;
+import com.beer.beer_forecast.account.repository.LoginRepository;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

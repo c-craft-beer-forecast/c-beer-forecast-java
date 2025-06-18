@@ -1,4 +1,4 @@
-package com.beer.beer_forecast.model;
+package com.beer.beer_forecast.account.model;
 
 import jakarta.persistence.*;
 

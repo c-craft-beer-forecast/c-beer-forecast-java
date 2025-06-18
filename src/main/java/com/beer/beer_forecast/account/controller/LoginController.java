@@ -1,6 +1,6 @@
-package com.beer.beer_forecast.controller;
-import com.beer.beer_forecast.service.*;
-import com.beer.beer_forecast.model.*;
+package com.beer.beer_forecast.account.controller;
+import com.beer.beer_forecast.account.service.*;
+import com.beer.beer_forecast.account.model.*;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

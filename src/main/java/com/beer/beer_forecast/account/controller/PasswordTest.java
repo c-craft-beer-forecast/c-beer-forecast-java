@@ -1,5 +1,5 @@
 
-package com.beer.beer_forecast.controller;
+package com.beer.beer_forecast.account.controller;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
