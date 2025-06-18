@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>メッセージ一覧</title>
+</head>
+<body>
+    <h1>hello</h1>
+    
+    <p th:if="${error}" th:text="${error}" style="color:red;"></p>
+
+    <ul>
+        <li th:each="log : ${login}">
+            <strong th:text="${log.name}">名前</strong>: 
+            <span th:text="${log.email}">email</span>
+            <span th:text="${log.password}">本文</span>
+        </li>
+    </ul>
+     <form method="post" action="/login">
+    </form>
+</body>
+</html>
