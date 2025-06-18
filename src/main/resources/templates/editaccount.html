@@ -25,8 +25,11 @@
                 <label for="name">名前</label>
                 <input type="text" id="name" th:field="*{name}" required />
 
+                <label for="name">パスワード</label>
+                <input type="password" id="password" th:field="*{password}" required />
+
                 <label for="isAdmin">管理者権限</label>
-                    <input type="checkbox" th:field="*{Admin}" /> 
+                    <input type="checkbox" th:field="*{admin}" /> 
                 
 
                 <button type="submit">更新</button>

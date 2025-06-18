@@ -43,6 +43,12 @@ public class AccountService {
 
         existing.setName(updatedEmployee.getName());
         existing.setEmail(updatedEmployee.getEmail());
+
+        String newPassword = updatedEmployee.getPassword();
+        if (newPassword != null && !newPassword.isBlank()){
+            String hashed = passwordEncoder.encode(newPassword);
+            existing.setPassword(hashed);
+        }
         existing.setAdmin(updatedEmployee.getAdmin());
         repository.save(existing);
     }

@@ -45,7 +45,7 @@ public class AccountContoroller {
 
     @PostMapping("/update")
     public String updateEmployee(@ModelAttribute Login updatedEmployee) {
-        service.updateEmployeeInfo(updatedEmployee); // nameとemailのみ更新
+        service.updateEmployeeInfo(updatedEmployee); 
         
         return "redirect:/admin";
     }
