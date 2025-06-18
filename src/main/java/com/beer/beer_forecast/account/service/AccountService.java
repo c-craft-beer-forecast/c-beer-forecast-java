@@ -32,6 +32,21 @@ public class AccountService {
         repository.deleteById(id);
     }
 
+    // アカウント編集
+    public Login findById(Integer id) {
+        return repository.findById(id).orElseThrow(() -> new RuntimeException("従業員データが存在しません: " + id));
+    }
+
+    public void updateEmployeeInfo(Login updatedEmployee) {
+        Login existing = repository.findById(updatedEmployee.getId())
+                .orElseThrow(() -> new RuntimeException("従業員データが存在しません: " + updatedEmployee.getId()));
+
+        existing.setName(updatedEmployee.getName());
+        existing.setEmail(updatedEmployee.getEmail());
+        existing.setAdmin(updatedEmployee.getAdmin());
+        repository.save(existing);
+    }
+
     // アカウントの全件取得
     public List<Login> getAllEmployees() {
         return repository.findAll();
