@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>H&C inc. 管理者ページ</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" /></head>
+</head>
+<body>
+    <header class="admin-header">
+        <div class="header-left">
+            <span class="company-name">H&C inc</span>
+        </div>
+        <div class="header-right">
+          <span class="employee-id">社員番号 : <span th:text="${session.loginUser.id}">1234</span></span>
+          <a th:href="@{/admin-login}" class="logout-btn">ログアウト</a>
+         
+        </div>
+    </header>
+
+    <div class="admin-container">
+        <aside class="sidebar">
+            <nav>
+                <ul>
+                    <li><a href="#" class="sidebar-item active" data-content="demand-prediction">需要予測</a></li>
+                    <li><a href="#" class="sidebar-item" data-content="sales-performance">販売実績</a></li>
+                    <li><a href="#" class="sidebar-item" data-content="employee-management">従業員管理</a></li>
+                     <li><a th:href="@{/changepassword}" class="switch-button">パスワード変更</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="content-area">
+            <div id="demand-prediction" class="content-section active">
+                <h2>需要予測</h2>
+                <p>ここに需要予測のデータやグラフが表示されます。</p>
+            </div>
+            <div id="sales-performance" class="content-section">
+                <h2>販売実績</h2>
+                <p>ここに販売実績のデータやレポートが表示されます。</p>
+            </div>
+            <div id="employee-management" class="content-section">
+                <h2>従業員管理</h2>
+                <p>ここに従業員のリストや管理機能が表示されます。</p>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

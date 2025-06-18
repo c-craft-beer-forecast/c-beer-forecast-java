@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>マイページログイン</title>
+  <link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+<body>
+ <a th:href="@{/admin-login}" class="switch-button">管理者ログインはこちら</a>
+
+  <main class="login-container">
+    <div class="login-left">
+      <h1>マイページへログイン</h1>
+    </div>
+    <div class="login-right">
+      <form th:action="@{/login}" method="post">
+        <label for="email">メールアドレスを入力</label>
+        <input type="email" id="email" name="email" required />
+
+        <label for="password">パスワードを入力</label>
+        <input type="password" id="password" name="password" required />
+
+        <button type="submit">ログイン</button>
+        
+    <p th:if="${error}" th:text="${error}" style="color:red;"></p>
+      </form>
+    </div>
+  </main>
+</body>
+</html>
+ 

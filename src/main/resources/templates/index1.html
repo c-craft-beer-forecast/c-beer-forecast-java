@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>メッセージ一覧</title>
+</head>
+<body>
+    <h1>投稿メッセージ</h1>
+
+    <form method="post" action="/login">
+        <input type="text" name="email" placeholder="email">
+        <input type="text" name="password" placeholder="password">
+        <button type="submit">login</button>
+    </form>
+    
+    <form method="post" action="/change-password">
+    <input type="text" name="email" placeholder="メールアドレス">
+    <input type="password" name="oldPassword" placeholder="現在のパスワード">
+    <input type="password" name="newPassword" placeholder="新しいパスワード">
+    <button type="submit">パスワード変更</button>
+</form>
+
+    <p th:if="${error}" th:text="${error}" style="color:red;"></p>
+
+    <ul>
+        <li th:each="log : ${logins}">
+            <strong th:text="${log.name}">名前</strong>: 
+            <span th:text="${log.email}">emial</span>
+            <span th:text="${log.password}">password</span>
+        </li>
+    </ul>
+</body>
+</html>
