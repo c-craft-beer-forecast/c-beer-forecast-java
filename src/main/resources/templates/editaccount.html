@@ -9,7 +9,17 @@
 </head>
 
 <body>
-    <a th:href="@{/admin}" class="logout-btn">EXIT</a>
+    <header class="admin-header">
+        <div class="header-left">
+            <span class="company-name">H&C inc</span>
+        </div>
+        <div class="header-right">
+            <span class="employee-id">社員番号 : <span th:text="${session.loginUser.id}">1234</span></span>
+            <a th:href="@{/admin}" class="logout-btn">ログアウト</a>
+
+        </div>
+    </header>
+
 
     <main class="login-container">
         <div class="login-left">
@@ -28,9 +38,16 @@
                 <label for="name">パスワード</label>
                 <input type="password" id="password" th:field="*{password}" required />
 
-                <label for="isAdmin">管理者権限</label>
-                    <input type="checkbox" th:field="*{admin}" /> 
+               
+                <label class="inline-checkbox-label">
+            <input type="checkbox" th:field="*{admin}" />
+  管理者権限
+</label>
+
                 
+                 
+              
+
 
                 <button type="submit">更新</button>
 
