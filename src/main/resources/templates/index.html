@@ -1,20 +1,22 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html xmlns:th="http://www.thymeleaf.org" lang="ja">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>H&C inc. 従業員ページ</title>
-    <link rel="stylesheet" th:href="@{/css/style.css}" /></head>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+
 <body>
-   <header class="employee-header">
-    <div class="header-left">
-        <span class="company-name">H&C inc</span>
-    </div>
-    <div class="header-right">
-        <span class="employee-id">社員番号 : <span th:text="${session.loginUser.id}">1234</span></span>
-        <a th:href="@{/login}" class="logout-btn">ログアウト</a>
-    </div>
-</header>
+    <header class="employee-header">
+        <div class="header-left">
+            <span class="company-name">H&C inc</span>
+        </div>
+        <div class="header-right">
+            <span class="employee-id">社員番号 : 1234</span>
+            <a href="login.html" class="logout-btn">ログアウト</a>
+        </div>
+    </header>
 
     <div class="employee-container">
         <aside class="sidebar">
@@ -28,33 +30,41 @@
         <main class="content-area">
             <div id="sales-registration" class="content-section active">
                 <h2>販売実績登録</h2>
-                <p>ここに販売実績を登録するためのフォームが表示されます。</p>
-                <form class="sales-form">
+                <form th:action="@{/sales/submit}" method="post" th:object="${salesResult}">
+                    <input type="hidden" th:field="*{salesNumber}" />
+
                     <label for="date">日付:</label>
-                    <input type="date" id="date" name="date" required>
+                    <input type="date" id="date" name="date" th:field="*{date}" required />
+
+                    <label for="product_id">商品名:</label>
+                    <select id="product_id" th:field="*{productId}" required>
+                        <option value="" disabled selected>選択してください</option>
+                        <option th:each="product : ${productList}" th:value="${product.id}" th:text="${product.name}">
+                        </option>
+                    </select>
 
 
+                    <label for="num_of_sales">売上本数:</label>
+                    <input type="number" id="num_of_sales" name="num_of_sales" th:field="*{numOfSales}" min="0"
+                        required />
 
-                    <label for="product">商品名:</label>
-                    <input type="text" id="product" name="product" placeholder="例: クラフトビールA" required>
+                    <label for="num_of_customers">来客人数:</label>
+                    <input type="number" id="num_of_customers" name="num_of_customers" th:field="*{numOfCustomers}"
+                        min="0" required />
 
-
-
-                    <label for="quantity">販売数量:</label>
-                    <input type="number" id="quantity" name="quantity" min="1" required>
-
-
-
-                    <label for="price">単価 (円):</label>
-                    <input type="number" id="price" name="price" step="0.01" min="0" required>
-
-
-
-                    <button type="submit">登録</button>
+                    <button type="submit">登録／更新</button>
                 </form>
+
+                <!-- 編集時のみ削除ボタンを表示 -->
+                <div th:if="${salesResult.salesNumber != null}">
+                    <form th:action="@{/sales/delete}" method="post" style="margin-top:1em;">
+                        <input type="hidden" name="id" th:value="${salesResult.salesNumber}" />
+                        <button type="submit" onclick="return confirm('本当に削除しますか？');">削除</button>
+                    </form>
+                </div>
             </div>
         </main>
     </div>
+</body>
 
-    </body>
 </html>
