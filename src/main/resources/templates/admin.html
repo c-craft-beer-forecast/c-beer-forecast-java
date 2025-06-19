@@ -36,7 +36,88 @@
         <main class="content-area">
             <div id="demand-prediction" class="content-section active">
                 <h2>需要予測</h2>
-                <p>ここに需要予測のデータやグラフが表示されます。</p>
+                <p>
+    <div class="container">
+        <h1>🍺 ビール発注推奨量取得システム</h1>
+        <button id="getOrderBtn">発注推奨量を取得</button>
+        <div id="loading">ロード中...</div>
+        <div id="result">
+            <h2>発注推奨量</h2>
+            <div id="orderRecommendationsContainer"></div>
+        </div>
+        <div id="errorMessages" class="error"></div>
+    </div>
+
+    <script>
+        document.getElementById('getOrderBtn').addEventListener('click', fetchOrderRecommendations);
+
+        async function fetchOrderRecommendations() {
+          
+            const loadingDiv = document.getElementById('loading');
+            const resultDiv = document.getElementById('orderRecommendationsContainer');
+            const errorDiv = document.getElementById('errorMessages');
+
+            loadingDiv.style.display = 'block';
+            resultDiv.innerHTML = '';
+            errorDiv.innerHTML = '';
+
+            const endpoint = 'https://beer-forecast-model-function.azurewebsites.net/api/get_order_recommendations';
+
+            try {
+                const response = await fetch(endpoint, {
+                    method: 'GET',
+                    headers: {
+                 
+                    }
+                });
+
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    throw new Error(`HTTP error! Status: ${response.status}, Message: ${errorText}`);
+                }
+
+                const data = await response.json();
+                console.log('取得したデータ:', data);
+
+                if (data.order_recommendations && data.order_recommendations.length > 0) {
+                    data.order_recommendations.forEach(rec => {
+                        const card = document.createElement('div');
+                        card.className = 'order-card';
+                        card.innerHTML = `
+                            <p><strong>発注日:</strong> ${rec.order_date} (${rec.order_day_label})</p>
+                            <p><strong>カバー期間:</strong> ${rec.coverage_period_start} から ${rec.coverage_period_end}</p>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>ビール種類</th>
+                                        <th>推奨量 (${data.unit})</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    ${Object.entries(rec.ordered_beers).map(([beerType, quantity]) => `
+                                        <tr>
+                                            <td>${beerType.replace('(本)', '')}</td>
+                                            <td>${quantity}</td>
+                                        </tr>
+                                    `).join('')}
+                                </tbody>
+                            </table>
+                        `;
+                        resultDiv.appendChild(card);
+                    });
+                } else {
+                    resultDiv.innerHTML = '<p>発注推奨量が見つかりませんでした。</p>';
+                }
+
+            } catch (error) {
+                console.error('発注推奨量の取得中にエラーが発生しました:', error);
+                errorDiv.innerHTML = `エラー: ${error.message}`;
+            } finally {
+                loadingDiv.style.display = 'none';
+            }
+        }
+    </script>
+</p>
             </div>
             <div id="sales-performance" class="content-section">
                 <h2>販売実績</h2>
@@ -59,10 +140,10 @@
                         <td th:text="${emp.name}">名前</td>
                         <td th:text="${emp.Admin} ? '✔' : ''"></td>
                         <td>
-                            <a th:href="@{'/edit/' + ${emp.id}}">編集</a>
+                            <a th:href="@{'/edit/' + ${emp.id}}" class="logout-btn">編集</a>
                             
-                            <form th:action="@{'/delete/' + ${emp.id}}" method="post">
-                                <button type="submit">削除</button>
+                            <form th:action="@{'/delete/' + ${emp.id}}" method="post" >
+                                <button type="submit" >削除</button>
                             </form>
                         </td>
                     </tr>
@@ -74,7 +155,10 @@
                     <p>名前：<input type="text" th:field="*{name}" /></p>
                     <p>メール：<input type="email" th:field="*{email}" /></p>
                     <p>パスワード：<input type="password" th:field="*{password}" /></p>
-                    <p>管理者：<input type="checkbox" th:field="*{admin}" /></p>
+                    <p>   <label class="inline-checkbox-label">
+            <input type="checkbox" th:field="*{admin}" />
+                管理者権限
+                </label></p>
                     <button type="submit">完了</button>
                 </form>
                 </p>
