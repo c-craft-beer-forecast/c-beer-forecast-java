@@ -31,7 +31,7 @@ public class SalesResultService {
         return salesResultRepository.findById(id);
     }
 
-       public void deleteById(Integer id) {
+    public void deleteById(Integer id) {
         salesResultRepository.deleteById(id);
     }
 }

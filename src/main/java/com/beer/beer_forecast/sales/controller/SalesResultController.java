@@ -44,13 +44,13 @@ public class SalesResultController {
         salesResult.setDate(LocalDate.parse(date));
         salesResult.setEditedDate(LocalDate.now());
         salesResultService.saveSalesResult(salesResult);
-        return "redirect:/";
+        return "redirect:/index";
     }
 
     // 削除
     @PostMapping("/sales/delete")
     public String delete(@RequestParam("id") Integer id) {
         salesResultService.deleteById(id);
-        return "redirect:/";
+        return "redirect:/index";
     }
 }

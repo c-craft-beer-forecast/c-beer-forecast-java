@@ -17,8 +17,8 @@ public class SalesResult {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer salesNumber;
 
-    @Column(name = "date")
-    private LocalDate date;
+    @Column(name = "record_date")
+    private LocalDate record_date;
 
     @Column(name = "edited_date")
     private LocalDate editedDate;
@@ -35,9 +35,9 @@ public class SalesResult {
     public SalesResult() {
     }
 
-    public SalesResult(LocalDate date, LocalDate editedDate, Integer numOfSales, Integer numOfCustomers,
+    public SalesResult(LocalDate record_date, LocalDate editedDate, Integer numOfSales, Integer numOfCustomers,
             Integer productId) {
-        this.date = date;
+        this.record_date = record_date;
         this.editedDate = editedDate;
         this.numOfSales = numOfSales;
         this.numOfCustomers = numOfCustomers;
@@ -53,11 +53,11 @@ public class SalesResult {
     }
 
     public LocalDate getDate() {
-        return date;
+        return record_date;
     }
 
     public void setDate(LocalDate date) {
-        this.date = date;
+        this.record_date = date;
     }
 
     public LocalDate getEditedDate() {
