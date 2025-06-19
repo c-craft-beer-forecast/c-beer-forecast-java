@@ -1,15 +1,18 @@
 package com.beer.beer_forecast.account.controller;
 
-import com.beer.beer_forecast.account.service.*;
-import com.beer.beer_forecast.account.model.*;
+import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-import jakarta.servlet.http.HttpSession;
-import java.util.Optional;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.List;
+import com.beer.beer_forecast.account.model.Login;
+import com.beer.beer_forecast.account.service.LoginService;
+
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class LoginController {
@@ -59,7 +62,7 @@ public class LoginController {
             if (service.checkLogin(email, password)) {
                 // ✅ 登录成功，存入 session
                 session.setAttribute("loginUser", user);
-                return "index";
+                return "redirect:/index"; // 重定向到主页
             }
         }
 
