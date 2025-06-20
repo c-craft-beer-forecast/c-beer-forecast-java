@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <title>H&C inc. 従業員ページ</title>
     <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script th:src="@{/sales_chart.js}" defer></script>
 </head>
 
 <body>
@@ -62,6 +64,28 @@
                         <button type="submit" onclick="return confirm('本当に削除しますか？');">削除</button>
                     </form>
                 </div>
+
+                <h2>販売実績</h2>
+                <form action="#" method="get" th:action="@{/index}">
+                    <label for="date">日付選択:</label>
+                    <input type="date" id="date" name="date" th:value="${selectedDate}" required />
+                    <button type="submit">表示</button>
+                </form>
+
+                <table border="1">
+                    <thead>
+                        <tr>
+                            <th>商品</th>
+                            <th>売上本数</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="item : ${summaryList}">
+                            <td th:text="${item[1]}"></td>
+                            <td th:text="${item[2]}"></td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </main>
     </div>
