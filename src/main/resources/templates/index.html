@@ -34,7 +34,7 @@
         <main class="content-area">
             <div id="sales-registration" class="content-section active">
                 <h2>販売実績登録</h2>
-                <form th:action="@{/sales/submit}" method="post" th:object="${salesResult}">
+                <form th:action="@{/sales/update}" method="post" th:object="${salesResult}">
                     <input type="hidden" th:field="*{salesNumber}" />
 
                     <label for="date">日付:</label>
