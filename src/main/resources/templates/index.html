@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <title>H&C inc. 従業員ページ</title>
     <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script th:src="@{/sales_chart.js}" defer></script>
 </head>
 
 <body>
@@ -13,8 +15,10 @@
             <span class="company-name">H&C inc</span>
         </div>
         <div class="header-right">
-            <span class="employee-id">社員番号 : 1234</span>
-            <a th:href="@{/login}" class="logout-btn">ログアウト</a>
+
+            <span class="employee-id">社員番号 : <span th:text="${session.loginUser.id}">1234</span></span>
+            <a th:href="@{/}" class="logout-btn">ログアウト</a>
+
         </div>
     </header>
 
@@ -52,7 +56,7 @@
                     <input type="number" id="num_of_customers" name="num_of_customers" th:field="*{numOfCustomers}"
                         min="0" required />
 
-                    <button type="submit">登録／更新</button>
+                    <button type="submit">登録</button>
                 </form>
 
                 <!-- 編集時のみ削除ボタンを表示 -->
@@ -62,6 +66,31 @@
                         <button type="submit" onclick="return confirm('本当に削除しますか？');">削除</button>
                     </form>
                 </div>
+
+                <h2>販売実績</h2>
+                <form action="#" method="get" th:action="@{/index}">
+                    <label for="date">日付選択:</label>
+                    <input type="date" id="date" name="date" th:value="${selectedDate}" required />
+                    <button type="submit">表示</button>
+                </form>
+
+                <table border="1">
+                    <thead>
+                        <tr>
+                            <th>商品</th>
+                            <th>売上本数</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="item : ${summaryList}">
+                            <td th:text="${item[3]}"></td>
+                            <td th:text="${item[4]}"></td>
+                            <td>
+                                <a th:href="@{'/sales/edit?id=' + ${item[0]} }">編集</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </main>
     </div>
