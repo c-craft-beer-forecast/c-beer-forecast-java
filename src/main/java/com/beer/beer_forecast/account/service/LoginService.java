@@ -23,7 +23,7 @@ public class LoginService {
     }
 
     public void addLogin(String email, String rawPassword) {
-        // 密码加密后存入数据库
+      
         String encodedPassword = passwordEncoder.encode(rawPassword);
         repository.save(new Login(email, encodedPassword));
     }
@@ -35,8 +35,8 @@ public class LoginService {
     public boolean checkLogin(String email, String rawPassword) {
         Optional<Login> userOpt = repository.findByEmail(email);
         if (userOpt.isPresent()) {
-            String encodedPassword = userOpt.get().getPassword(); // 数据库里的加密密码
-            return passwordEncoder.matches(rawPassword, encodedPassword); // 对比明文和加密
+            String encodedPassword = userOpt.get().getPassword();
+            return passwordEncoder.matches(rawPassword, encodedPassword); 
         }
         return false;
     }
@@ -67,7 +67,7 @@ public class LoginService {
                 return true;
             }
         }
-        return false; // 用户不存在 或 旧密码错误
+        return false; 
     }
 
 }

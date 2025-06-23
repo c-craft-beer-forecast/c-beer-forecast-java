@@ -67,7 +67,7 @@
                             const response = await fetch(endpoint, {
                                 method: 'GET',
                                 headers: {
-
+                                   
                                 }
                             });
 
@@ -121,7 +121,27 @@
             </div>
             <div id="sales-performance" class="content-section">
                 <h2>販売実績</h2>
-                <p>ここに販売実績のデータやレポートが表示されます。</p>
+                <p>
+                <h1>天気予報一覧</h1>
+                <table border="1">
+                    <tr>
+                        <th>ID</th>
+                        <th>記録日</th>
+                        <th>平均気温 (℃)</th>
+                        <th>曜日</th>
+                        <th>月</th>
+                        <th>天気コード</th>
+                    </tr>
+                    <tr th:each="weather : ${weatherList}">
+                        <td th:text="${weather.id}"></td>
+                        <td th:text="${weather.recordDate}"></td>
+                        <td th:text="${weather.avgTempC}"></td>
+                        <td th:text="${weather.dayOfWeek}"></td>
+                        <td th:text="${weather.month}"></td>
+                        <td th:text="${weather.weatherCode}"></td>
+                    </tr>
+                </table>
+                </p>
             </div>
             <div id="employee-management" class="content-section">
                 <h2>従業員管理</h2>
