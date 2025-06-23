@@ -15,8 +15,8 @@
             <span class="company-name">H&C inc</span>
         </div>
         <div class="header-right">
-            <span class="employee-id">社員番号 : 1234</span>
-            <a href="login.html" class="logout-btn">ログアウト</a>
+            <span class="employee-id">社員番号 : <span th:text="${session.loginUser.id}">1234</span></span>
+            <a th:href="@{/}" class="logout-btn">ログアウト</a>
         </div>
     </header>
 
