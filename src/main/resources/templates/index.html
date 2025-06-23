@@ -54,7 +54,7 @@
                     <input type="number" id="num_of_customers" name="num_of_customers" th:field="*{numOfCustomers}"
                         min="0" required />
 
-                    <button type="submit">登録／更新</button>
+                    <button type="submit">登録</button>
                 </form>
 
                 <!-- 編集時のみ削除ボタンを表示 -->
@@ -81,8 +81,11 @@
                     </thead>
                     <tbody>
                         <tr th:each="item : ${summaryList}">
-                            <td th:text="${item[1]}"></td>
-                            <td th:text="${item[2]}"></td>
+                            <td th:text="${item[3]}"></td>
+                            <td th:text="${item[4]}"></td>
+                            <td>
+                                <a th:href="@{'/sales/edit?id=' + ${item[0]} }">編集</a>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
