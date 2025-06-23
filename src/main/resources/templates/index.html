@@ -32,29 +32,32 @@
         <main class="content-area">
             <div id="sales-registration" class="content-section active">
                 <h2>販売実績登録</h2>
-                <form th:action="@{/sales/submit}" method="post" th:object="${salesResult}">
+                <form th:action="@{/sales/submitAll}" method="post" th:object="${salesResult}">
                     <input type="hidden" th:field="*{salesNumber}" />
 
                     <label for="date">日付:</label>
                     <input type="date" id="date" name="date" th:field="*{date}" required />
 
-                    <label for="product_id">商品名:</label>
-                    <select id="product_id" th:field="*{productId}" required>
-                        <option value="" disabled selected>選択してください</option>
-                        <option th:each="product : ${productList}" th:value="${product.id}" th:text="${product.name}">
-                        </option>
-                    </select>
-
-
-                    <label for="num_of_sales">売上本数:</label>
-                    <input type="number" id="num_of_sales" name="num_of_sales" th:field="*{numOfSales}" min="0"
-                        required />
-
-                    <label for="num_of_customers">来客人数:</label>
-                    <input type="number" id="num_of_customers" name="num_of_customers" th:field="*{numOfCustomers}"
-                        min="0" required />
-
-                    <button type="submit">登録／更新</button>
+                    <label for="numOfCustomers">来客人数：</label>
+                    <input type="number" id="numOfCustomers" name="numOfCustomers"  th:field="*{numOfCustomers}" required />
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>商品名</th>
+                                <th>売上本数</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="product : ${productList}">
+                                <td th:text="${product.name}"></td>
+                                <td>
+                                    <input type="number" name="numOfSalesList" min="0" required />
+                                    <input type="hidden" name="productIdList" th:value="${product.id}" />
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <button type="submit" class="submit-btn">登録</button>
                 </form>
 
                 <!-- 編集時のみ削除ボタンを表示 -->

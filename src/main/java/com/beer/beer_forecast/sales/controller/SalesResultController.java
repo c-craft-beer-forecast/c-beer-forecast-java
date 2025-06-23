@@ -3,13 +3,11 @@ package com.beer.beer_forecast.sales.controller;
 import java.time.LocalDate;
 import java.util.List;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -63,11 +61,24 @@ public class SalesResultController {
     }
 
     // 登録・更新
-    @PostMapping("/sales/submit")
-    public String submit(@ModelAttribute SalesResult salesResult, @RequestParam("date") String date) {
-        salesResult.setDate(LocalDate.parse(date));
-        salesResult.setEditedDate(LocalDate.now());
-        salesResultService.saveSalesResult(salesResult);
+    @PostMapping("/sales/submitAll")
+    public String submitAll(
+            @RequestParam("date") String date,
+            @RequestParam("productIdList") List<Integer> productIdList,
+            @RequestParam("numOfSalesList") List<Integer> numOfSalesList,
+            @RequestParam("numOfCustomers") Integer numOfCustomers ){
+        LocalDate recordDate = LocalDate.parse(date);
+        LocalDate editedDate = LocalDate.now();
+
+        for (int i = 0; i < productIdList.size(); i++) {
+            SalesResult sr = new SalesResult();
+            sr.setDate(recordDate);
+            sr.setEditedDate(editedDate);
+            sr.setProductId(productIdList.get(i));
+            sr.setNumOfSales(numOfSalesList.get(i));
+            sr.setNumOfCustomers(numOfCustomers);
+            salesResultService.saveSalesResult(sr);
+        }
         return "redirect:/index";
     }
 
