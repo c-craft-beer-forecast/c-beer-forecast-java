@@ -31,17 +31,17 @@ public class LoginController {
 
     @GetMapping("/admin-login")
     public String showAdminLoginPage() {
-        return "admin-login"; // 注意不要写 ".html"
+        return "admin-login"; //
     }
 
     @GetMapping("/login")
     public String showLoginPage() {
-        return "login"; // 注意不要写 ".html"
+        return "login"; //
     }
 
     @GetMapping("/changepassword")
     public String showChangePasswordForm() {
-        return "changepassword"; // 返回 changepassword.html
+        return "changepassword"; //
     }
 
     @PostMapping("/login")
@@ -109,7 +109,7 @@ public class LoginController {
         } else {
             model.addAttribute("error", "古いパスワードが正しくありません。");
         }
-        return "admin"; // 或重定向到确认页面
+        return "admin"; //
     }
 
 }

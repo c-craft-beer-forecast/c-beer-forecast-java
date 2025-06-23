@@ -12,24 +12,15 @@ import com.beer.beer_forecast.sales.model.SalesResult;
 
 @Repository
 public interface SalesResultRepository extends JpaRepository<SalesResult, Integer> {
-    @Query(value = """
-            SELECT record_date, product_id, SUM(num_of_sales) AS total_sales
-            FROM sales_results
-            WHERE record_date BETWEEN :startDate AND :endDate
-            GROUP BY record_date, product_id
-            ORDER BY record_date, product_id
-            """, nativeQuery = true)
-    List<Object[]> findSalesSummaryByDateAndProduct(
-            @Param("startDate") LocalDate startDate,
-            @Param("endDate") LocalDate endDate);
 
+    // 売り上げ表示用
     @Query(value = """
-            SELECT sr.product_id, p.name, SUM(sr.num_of_sales) AS total_sales
+            SELECT sr.sales_number, sr.record_date, sr.product_id, p.name, sr.num_of_sales, sr.num_of_customers
             FROM sales_results sr
             JOIN products p ON sr.product_id = p.id
             WHERE sr.record_date = :date
-            GROUP BY sr.product_id, p.name
             ORDER BY sr.product_id
             """, nativeQuery = true)
-    List<Object[]> findSalesSummaryBySingleDate(@Param("date") LocalDate date);
+    List<Object[]> findSalesDetailsByDate(@Param("date") LocalDate date);
+
 }

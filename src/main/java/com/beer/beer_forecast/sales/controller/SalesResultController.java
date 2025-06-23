@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.beer.beer_forecast.sales.model.SalesResult;
+import com.beer.beer_forecast.sales.model.Product;
 import com.beer.beer_forecast.sales.service.ProductService;
 import com.beer.beer_forecast.sales.service.SalesResultService;
 import com.beer.beer_forecast.sales.service.SalesSummaryService;
@@ -24,6 +25,7 @@ public class SalesResultController {
     private ProductService productService;
     @Autowired
     private SalesSummaryService salesSummaryService;
+
 
     // 新規登録画面
     @GetMapping("/index")
@@ -53,14 +55,19 @@ public class SalesResultController {
 
     // 編集時
     @GetMapping("/sales/edit")
-    public String edit(@RequestParam("id") Integer id, Model model) {
-        SalesResult sr = salesResultService.findById(id).orElse(null);
-        model.addAttribute("salesResult", sr);
+    public String edit(@RequestParam("id") Integer salesNumber, Model model) {
+        SalesResult salesResult = salesResultService.findById(salesNumber)
+                .orElseThrow(() -> new IllegalArgumentException("無効なID: " + salesNumber));
+        model.addAttribute("salesResult", salesResult);
         model.addAttribute("productList", productService.findAll());
-        return "index";
+        Product product = productService.findById(salesResult.getProductId())
+                .orElseThrow(() -> new IllegalArgumentException("無効な商品ID: " + salesResult.getProductId()));
+        model.addAttribute("productName", product.getName());
+        return "editsalesresult";
     }
 
     // 登録・更新
+
     @PostMapping("/sales/submitAll")
     public String submitAll(
             @RequestParam("date") String date,
@@ -79,6 +86,7 @@ public class SalesResultController {
             sr.setNumOfCustomers(numOfCustomers);
             salesResultService.saveSalesResult(sr);
         }
+
         return "redirect:/index";
     }
 

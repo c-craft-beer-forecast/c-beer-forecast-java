@@ -17,8 +17,8 @@ public class SalesSummaryService {
         this.salesResultRepository = salesResultRepository;
     }
 
-    // テーブル表示ように作成
+    // テーブル表示用に作成
     public List<Object[]> getSalesByDate(LocalDate date) {
-    return salesResultRepository.findSalesSummaryBySingleDate(date);
+    return salesResultRepository.findSalesDetailsByDate(date);
 }
 }
