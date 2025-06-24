@@ -13,64 +13,32 @@ public class WeatherData {
     @Column(name = "record_date")
     private LocalDate recordDate;
 
-    @Column(name = "avg_temp_c") // ⭐ 正确映射数据库字段
+    @Column(name = "avg_temp_c")
     private float avgTempC;
-
-    @Column(name = "day_of_week")
-    private String dayOfWeek;
-
-    private int month;
 
     @Column(name = "weather_code")
     private int weatherCode;
 
-    // ✅ Getter & Setter（确保变量名和上面一致）
+    // Getter & Setter
+    public int getId() { return id; }
+    public void setId(int id) { this.id = id; }
+    public LocalDate getRecordDate() { return recordDate; }
+    public void setRecordDate(LocalDate recordDate) { this.recordDate = recordDate; }
+    public float getAvgTempC() { return avgTempC; }
+    public void setAvgTempC(float avgTempC) { this.avgTempC = avgTempC; }
+    public int getWeatherCode() { return weatherCode; }
+    public void setWeatherCode(int weatherCode) { this.weatherCode = weatherCode; }
 
-    public int getId() {
-        return id;
+    // 天気名を返すプロパティ（DBには保存されない）
+    @Transient
+    public String getWeatherName() {
+        return switch (weatherCode) {
+            case 1 -> "大雨、雷雨";
+            case 2 -> "小雨";
+            case 3 -> "くもり";
+            case 4 -> "晴れ（ややくもり）";
+            case 5 -> "快晴";
+            default -> "不明";
+        };
     }
-
-    public void setId(int id) {
-        this.id = id;
     }
-
-    public LocalDate getRecordDate() {
-        return recordDate;
-    }
-
-    public void setRecordDate(LocalDate recordDate) {
-        this.recordDate = recordDate;
-    }
-
-    public float getAvgTempC() {
-        return avgTempC;
-    }
-
-    public void setAvgTempC(float avgTempC) {
-        this.avgTempC = avgTempC;
-    }
-
-    public String getDayOfWeek() {
-        return dayOfWeek;
-    }
-
-    public void setDayOfWeek(String dayOfWeek) {
-        this.dayOfWeek = dayOfWeek;
-    }
-
-    public int getMonth() {
-        return month;
-    }
-
-    public void setMonth(int month) {
-        this.month = month;
-    }
-
-    public int getWeatherCode() {
-        return weatherCode;
-    }
-
-    public void setWeatherCode(int weatherCode) {
-        this.weatherCode = weatherCode;
-    }
-}

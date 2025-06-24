@@ -8,6 +8,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -25,7 +26,6 @@ public class SalesResultController {
     private ProductService productService;
     @Autowired
     private SalesSummaryService salesSummaryService;
-
 
     // 新規登録画面
     @GetMapping("/index")
@@ -73,7 +73,7 @@ public class SalesResultController {
             @RequestParam("date") String date,
             @RequestParam("productIdList") List<Integer> productIdList,
             @RequestParam("numOfSalesList") List<Integer> numOfSalesList,
-            @RequestParam("numOfCustomers") Integer numOfCustomers ){
+            @RequestParam("numOfCustomers") Integer numOfCustomers) {
         LocalDate recordDate = LocalDate.parse(date);
         LocalDate editedDate = LocalDate.now();
 
@@ -89,6 +89,12 @@ public class SalesResultController {
 
         return "redirect:/index";
     }
+    @PostMapping("/sales/update")
+    public String updateSales(@ModelAttribute SalesResult updatedResult) {
+        updatedResult.setEditedDate(LocalDate.now());
+        salesResultService.saveSalesResult(updatedResult);
+        return "redirect:/index";
+    }
 
     // 削除
     @PostMapping("/sales/delete")
@@ -96,4 +102,7 @@ public class SalesResultController {
         salesResultService.deleteById(id);
         return "redirect:/index";
     }
+
+  
+
 }

@@ -119,30 +119,87 @@
                 </script>
                 </p>
             </div>
+
             <div id="sales-performance" class="content-section">
                 <h2>販売実績</h2>
                 <p>
                 <h1>天気</h1>
                 <table border="1">
                     <tr>
-                        <th>ID</th>
                         <th>記録日</th>
                         <th>平均気温 (℃)</th>
-                        <th>曜日</th>
-                        <th>月</th>
-                        <th>天気コード</th>
+                        <th>天気</th>
+
                     </tr>
                     <tr th:each="weather : ${weatherList}">
-                        <td th:text="${weather.id}"></td>
-                        <td th:text="${weather.recordDate}"></td>
-                        <td th:text="${weather.avgTempC}"></td>
-                        <td th:text="${weather.dayOfWeek}"></td>
-                        <td th:text="${weather.month}"></td>
-                        <td th:text="${weather.weatherCode}"></td>
+                        <td th:text="${weather.recordDate}">2025-06-23</td>
+                        <td th:text="${weather.avgTempC}">25.5</td>
+                        <td th:text="${weather.weatherName}">晴れ</td>
                     </tr>
                 </table>
-                </p>
+                <h2>販売実績登録</h2>
+                <form th:action="@{/admin/sales/submitAll}" method="post">
+                    <input type="hidden" name="salesNumber" th:value="${salesResult.salesNumber}" />
+                    <label for="date">日付:</label>
+                    <input type="date" id="date" name="date" th:value="${salesResult.date}" required />
+                    <label for="numOfCustomers">来客人数：</label>
+                    <input type="number" id="numOfCustomers" name="numOfCustomers"
+                        th:value="${salesResult.numOfCustomers}" required />
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>商品名</th>
+                                <th>売上本数</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="product : ${productList}">
+                                <td th:text="${product.name}"></td>
+                                <td>
+                                    <input type="number" name="numOfSalesList" min="0" required />
+                                    <input type="hidden" name="productIdList" th:value="${product.id}" />
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <button type="submit" class="submit-btn">登録</button>
+                </form>
+
+                <!-- 編集時削除 -->
+                <div th:if="${salesResult.salesNumber != null}">
+                    <form th:action="@{/admin/sales/delete}" method="post">
+                        <input type="hidden" name="id" th:value="${salesResult.salesNumber}" />
+                        <button type="submit" onclick="return confirm('本当に削除しますか？');">削除</button>
+                    </form>
+                </div>
+
+                <!-- 実績表示 -->
+                <h2>販売実績</h2>
+                <form th:action="@{/admin}" method="get">
+                    <label for="date">日付選択:</label>
+                    <input type="date" id="date" name="date" th:value="${selectedDate}" required />
+                    <button type="submit">表示</button>
+                </form>
+                <table border="1">
+                    <thead>
+                        <tr>
+                            <th>商品</th>
+                            <th>売上本数</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="item : ${summaryList}">
+                            <td th:text="${item[3]}"></td>
+                            <td th:text="${item[4]}"></td>
+                            <td>
+                                <a th:href="@{'/admin/edit/sales?id=' + ${item[0]} }">編集</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
+            </p>
             <div id="employee-management" class="content-section">
                 <h2>従業員管理</h2>
                 <p>
@@ -182,7 +239,6 @@
                     <button type="submit">完了</button>
                 </form>
                 </p>
-            </div>
         </main>
     </div>
 
