@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ja">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>販売実績編集</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+
+<body>
+    <header class="admin-header">
+        <div class="header-left">
+            <span class="company-name">H&C inc</span>
+        </div>
+        <div class="header-right">
+            <a th:href="@{/admin}" class="logout-btn">戻る</a>
+        </div>
+    </header>
+
+    <main class="login-container">
+        <div class="login-left">
+            <h1>販売実績編集</h1>
+        </div>
+        <div class="login-right">
+            <form th:action="@{/admin/sales/update}" th:object="${salesResult}" method="post">
+                <!-- 隠し項目: salesNumber -->
+                <input type="hidden" th:field="*{salesNumber}" />
+
+                <label>日付</label>
+                <p th:text="${#temporals.format(salesResult.date, 'yyyy-MM-dd')}"></p>
+                <input type="hidden" th:field="*{date}" />
+
+                <label for="product_id">商品名</label>
+                <p th:text="${productName}"></p>
+                <input type="hidden" th:field="*{productId}" />
+
+                <label for="num_of_sales">売上本数</label>
+                <input type="number" id="num_of_sales" th:field="*{numOfSales}" min="0" required />
+
+                <label for="num_of_customers">来客人数</label>
+                <input type="number" id="num_of_customers" th:field="*{numOfCustomers}" min="0" required />
+
+                <button type="submit">更新</button>
+
+                <p th:if="${error}" th:text="${error}" style="color:red;"></p>
+            </form>
+        </div>
+    </main>
+</body>
+
+</html>

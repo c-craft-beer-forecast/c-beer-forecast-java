@@ -18,7 +18,7 @@ public class SalesResult {
     private Integer salesNumber;
 
     @Column(name = "record_date")
-    private LocalDate record_date;
+private LocalDate date;
 
     @Column(name = "edited_date")
     private LocalDate editedDate;
@@ -37,7 +37,7 @@ public class SalesResult {
 
     public SalesResult(LocalDate record_date, LocalDate editedDate, Integer numOfSales, Integer numOfCustomers,
             Integer productId) {
-        this.record_date = record_date;
+        this.date = record_date;
         this.editedDate = editedDate;
         this.numOfSales = numOfSales;
         this.numOfCustomers = numOfCustomers;
@@ -53,11 +53,11 @@ public class SalesResult {
     }
 
     public LocalDate getDate() {
-        return record_date;
+        return date;
     }
 
     public void setDate(LocalDate date) {
-        this.record_date = date;
+        this.date = date;
     }
 
     public LocalDate getEditedDate() {
