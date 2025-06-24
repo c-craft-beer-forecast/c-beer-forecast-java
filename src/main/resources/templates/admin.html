@@ -61,14 +61,11 @@
                         resultDiv.innerHTML = '';
                         errorDiv.innerHTML = '';
 
-                        const endpoint = 'https://beer-forecast-model-function.azurewebsites.net/api/get_order_recommendations';
+                        const endpoint = '/forecast';
 
                         try {
                             const response = await fetch(endpoint, {
                                 method: 'GET',
-                                headers: {
-
-                                }
                             });
 
                             if (!response.ok) {
