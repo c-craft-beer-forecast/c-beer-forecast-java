@@ -1,132 +1,145 @@
 body {
-  margin: 0;
-  font-family: "Helvetica Neue", sans-serif;
-  background-color: #ffffff;
+    margin: 0;
+    font-family: "Helvetica Neue", sans-serif;
+    background-color: #ffffff;
 }
 
 /* ログインコンテナの基本スタイル */
 .login-container {
-  display: flex;
-  min-height: 100vh;
-  flex-direction: row;
+    display: flex;
+    min-height: 100vh;
+    flex-direction: row;
 }
 
 /* 左パネル（黄色背景部分）のスタイル */
 .login-left {
-  background-color: #FFD000; /* メインカラー */
-  color: white;
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  padding: 2rem;
-  font-size: 1.8rem;
-  font-weight: bold;
+    background-color: #FFD000;
+    /* メインカラー */
+    color: white;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 2rem;
+    font-size: 1.8rem;
+    font-weight: bold;
 }
 
 /* 管理者ログインの左パネルの色 */
 /*.admin-color {
   /* 必要であれば管理者ログイン固有の色を設定 */
-  /* background-color: #FFB700; */ /* 例: メインカラーの少し暗い色 */
+/* background-color: #FFB700; */
+/* 例: メインカラーの少し暗い色 */
 /*}/*
 
 
 /* 右パネル（フォーム部分）のスタイル */
 .login-right {
-  flex: 2;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 2rem;
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 2rem;
 }
 
 /* フォームの共通スタイル */
 form {
-  max-width: 500px;
-  margin: 0 auto;
-  width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+    width: 100%;
 }
 
 /* ラベルのスタイル */
 label {
-  font-size: 1.2rem;
-  margin-bottom: 0.5rem;
-  display: block;
-  color: #444342; /* 文字色を調整 */
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    display: block;
+    color: #444342;
+    /* 文字色を調整 */
 }
 
 /* 入力フィールドのスタイル */
 input {
-  width: 100%;
-  padding: 1rem;
-  margin-bottom: 1.5rem;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  font-size: 1rem;
-  box-sizing: border-box; /* パディングを含めて幅を計算 */
+    width: 100%;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+    box-sizing: border-box;
+    /* パディングを含めて幅を計算 */
 }
 
 /* ボタンのスタイル */
 button {
-  width: 100%;
-  padding: 1rem;
-  background-color: #0F0F0F; /* ダークカラー */
-  color: white;
-  font-size: 1.2rem;
-  font-weight: bold;
-  border: none;
-  border-radius: 1rem;
-  cursor: pointer;
-  transition: background-color 0.3s ease; /* ホバー時のアニメーション */
+    width: 100%;
+    padding: 1rem;
+    background-color: #0F0F0F;
+    /* ダークカラー */
+    color: white;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    /* ホバー時のアニメーション */
 }
 
 button:hover {
-  background-color: #2A2929; /* ホバー時の色 */
+    background-color: #2A2929;
+    /* ホバー時の色 */
 }
 
 /* スイッチボタン（管理者/一般社員ログイン切り替え）のスタイル */
 .switch-button {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  background-color: #FFD000; /* メインカラー */
-  color: #0F0F0F; /* ダークカラー */
-  padding: 12px 20px;
-  border-radius: 20px;
-  text-decoration: none;
-  font-weight: bold;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: background-color 0.3s ease, color 0.3s ease;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color: #FFD000;
+    /* メインカラー */
+    color: #0F0F0F;
+    /* ダークカラー */
+    padding: 12px 20px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-weight: bold;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .switch-button:hover {
-  background-color: #FFB700; /* ホバー時の色 */
-  color: #000;
+    background-color: #FFB700;
+    /* ホバー時の色 */
+    color: #000;
 }
 
 /* スマホ対応 */
 @media (max-width: 768px) {
-  .login-container {
-    flex-direction: column;
-  }
+    .login-container {
+        flex-direction: column;
+    }
 
-  .login-left, .login-right {
-    flex: unset;
-    width: 100%;
-    padding: 2rem;
-  }
+    .login-left,
+    .login-right {
+        flex: unset;
+        width: 100%;
+        padding: 2rem;
+    }
 
-  .login-left {
-    font-size: 1.5rem;
-  }
+    .login-left {
+        font-size: 1.5rem;
+    }
 
-  .switch-button {
-    position: static; /* スマホでは静的な配置に */
-    margin: 20px auto; /* 中央揃え */
-    display: block;
-    text-align: center;
-  }
+    .switch-button {
+        position: static;
+        /* スマホでは静的な配置に */
+        margin: 20px auto;
+        /* 中央揃え */
+        display: block;
+        text-align: center;
+    }
 }
 
 /*admin.html用のCSSを追記しました*/
@@ -134,7 +147,8 @@ button:hover {
 
 /* ヘッダー */
 .admin-header {
-    background-color: #0F0F0F; /* ダークカラー */
+    background-color: #0F0F0F;
+    /* ダークカラー */
     color: white;
     padding: 15px 30px;
     display: flex;
@@ -159,7 +173,8 @@ button:hover {
 }
 
 .logout-btn {
-    background-color: #444342; /* 少し明るいダークグレー */
+    background-color: #444342;
+    /* 少し明るいダークグレー */
     color: white;
     padding: 8px 15px;
     border-radius: 5px;
@@ -169,19 +184,22 @@ button:hover {
 }
 
 .logout-btn:hover {
-    background-color: #2A2929; /* さらに暗く */
+    background-color: #2A2929;
+    /* さらに暗く */
 }
 
 /* メインコンテナ（サイドバーとコンテンツエリア） */
 .admin-container {
     display: flex;
-    min-height: calc(100vh - 60px); /* ヘッダーの高さ分を引く */
+    min-height: calc(100vh - 60px);
+    /* ヘッダーの高さ分を引く */
 }
 
 /* サイドバー */
 .sidebar {
     width: 250px;
-    background-color: #FFD000; /* メインカラー */
+    background-color: #FFD000;
+    /* メインカラー */
     padding-top: 20px;
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
 }
@@ -199,7 +217,8 @@ button:hover {
 .sidebar-item {
     display: block;
     padding: 15px 20px;
-    color: #0F0F0F; /* ダークカラー */
+    color: #0F0F0F;
+    /* ダークカラー */
     text-decoration: none;
     font-size: 1.1rem;
     font-weight: bold;
@@ -207,27 +226,33 @@ button:hover {
 }
 
 .sidebar-item:hover {
-    background-color: #FFB700; /* ホバー時の色 */
+    background-color: #FFB700;
+    /* ホバー時の色 */
 }
 
 .sidebar-item.active {
-    background-color: #FFB700; /* アクティブなタブの色 */
-    color: white; /* アクティブなタブの文字色 */
+    background-color: #FFB700;
+    /* アクティブなタブの色 */
+    color: white;
+    /* アクティブなタブの文字色 */
 }
 
 /* コンテンツエリア */
 .content-area {
     flex-grow: 1;
     padding: 30px;
-    background-color: #f8f8f8; /* 薄い背景色 */
+    background-color: #f8f8f8;
+    /* 薄い背景色 */
 }
 
 .content-section {
-    display: none; /* デフォルトでは非表示 */
+    display: none;
+    /* デフォルトでは非表示 */
 }
 
 .content-section.active {
-    display: block; /* アクティブなセクションのみ表示 */
+    display: block;
+    /* アクティブなセクションのみ表示 */
 }
 
 /* スマホ対応 (admin.htmlのレイアウト) */
@@ -254,11 +279,13 @@ button:hover {
         width: 100%;
         padding-top: 0;
         box-shadow: none;
-        order: -1; /* ヘッダーのすぐ下に表示 */
+        order: -1;
+        /* ヘッダーのすぐ下に表示 */
     }
 
     .sidebar nav ul {
-        display: flex; /* タブを横並びに */
+        display: flex;
+        /* タブを横並びに */
         justify-content: space-around;
         border-bottom: 1px solid #FFB700;
     }
@@ -283,7 +310,8 @@ button:hover {
 
 /* 従業員ページヘッダー */
 .employee-header {
-    background-color: #0F0F0F; /* ダークカラー */
+    background-color: #0F0F0F;
+    /* ダークカラー */
     color: white;
     padding: 15px 30px;
     display: flex;
@@ -300,7 +328,8 @@ button:hover {
 /* メインコンテナ（サイドバーとコンテンツエリア） */
 .employee-container {
     display: flex;
-    min-height: calc(100vh - 60px); /* ヘッダーの高さ分を引く */
+    min-height: calc(100vh - 60px);
+    /* ヘッダーの高さ分を引く */
 }
 
 /* サイドバーはadmin.htmlと共通なので、既存の .sidebar, .sidebar nav ul, li, .sidebar-item, .sidebar-item.active が適用されます。*/
@@ -317,7 +346,7 @@ button:hover {
     border: 1px solid #ddd;
     border-radius: 8px;
     background-color: #fff;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
 }
 
 .sales-form label {
@@ -329,7 +358,8 @@ button:hover {
 .sales-form input[type="date"],
 .sales-form input[type="text"],
 .sales-form input[type="number"] {
-    width: calc(100% - 22px); /* パディングとボーダーを考慮 */
+    width: calc(100% - 22px);
+    /* パディングとボーダーを考慮 */
     padding: 10px;
     margin-bottom: 15px;
     border: 1px solid #ccc;
@@ -339,10 +369,13 @@ button:hover {
 }
 
 .sales-form button {
-    width: auto; /* ボタンの幅をコンテンツに合わせる */
+    width: auto;
+    /* ボタンの幅をコンテンツに合わせる */
     padding: 12px 25px;
-    background-color: #FFD000; /* メインカラー */
-    color: #0F0F0F; /* ダークカラー */
+    background-color: #FFD000;
+    /* メインカラー */
+    color: #0F0F0F;
+    /* ダークカラー */
     font-size: 1.1rem;
     font-weight: bold;
     border: none;
@@ -352,7 +385,8 @@ button:hover {
 }
 
 .sales-form button:hover {
-    background-color: #FFB700; /* ホバー時の色 */
+    background-color: #FFB700;
+    /* ホバー時の色 */
 }
 
 
@@ -368,12 +402,13 @@ button:hover {
     /* .header-right, .employee-id, .admin-container, .sidebar, .sidebar nav ul, li, .sidebar-item, .content-area も
        admin.html のスマホ対応と同じように振る舞います。 */
 }
+
 /* ビール発注推奨量のスタイル */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 20px;
     background-color: #f4f7f6;
-    color: #333;
+    color: #0F0F0F;
 }
 
 .container {
@@ -382,11 +417,11 @@ body {
     background: #fff;
     padding: 30px;
     border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 h1 {
-    color: #2c3e50;
+    color: #0F0F0F;
     text-align: center;
     margin-bottom: 30px;
 }
@@ -396,7 +431,7 @@ button {
     width: 100%;
     padding: 15px;
     font-size: 1.1em;
-    background-color: #4CAF50;
+    background-color: #FFD000;
     color: white;
     border: none;
     border-radius: 5px;
@@ -405,14 +440,14 @@ button {
 }
 
 button:hover {
-    background-color: #45a049;
+    background-color: #FFB700;
 }
 
 #loading {
     text-align: center;
     margin-top: 20px;
     font-weight: bold;
-    color: #007bff;
+    color: #0F0F0F;
     display: none;
 }
 
@@ -423,18 +458,18 @@ button:hover {
 }
 
 #result h2 {
-    color: #2c3e50;
+    color: #0f0f0f;
     margin-bottom: 15px;
 }
 
 .order-card {
     background-color: #e9f7ef;
     border: 1px solid #d4edda;
-    border-left: 5px solid #28a745;
+    border-left: 5px solid #FFD000;
     border-radius: 5px;
     padding: 15px 20px;
     margin-bottom: 15px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
 }
 
 .order-card p {
@@ -443,7 +478,7 @@ button:hover {
 }
 
 .order-card strong {
-    color: #0056b3;
+    color: #0F0F0F;
 }
 
 .error {
@@ -459,7 +494,8 @@ table {
     margin-top: 10px;
 }
 
-th, td {
+th,
+td {
     border: 1px solid #ddd;
     padding: 8px;
     text-align: left;
@@ -470,18 +506,18 @@ th {
 }
 
 .inline-checkbox-label {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  font-weight: bold;
-  font-size: 1.1rem;
-  margin: 10px 10px;  /* 增加上下边距 */
-  white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin: 10px 10px;
+    /* 增加上下边距 */
+    white-space: nowrap;
 }
 
 /* 复选框放大 */
 .inline-checkbox-label input[type="checkbox"] {
-  transform: scale(2.5);
-  margin: 0;
+    transform: scale(2.5);
+    margin: 0;
 }
-
